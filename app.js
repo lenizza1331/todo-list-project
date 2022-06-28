@@ -1,6 +1,8 @@
 let todos = [];
 let users = [];
 const todoList = document.querySelector('#todo-list');
+const userSelect = document.querySelector('#user-todo');
+
 
 document.addEventListener('DOMContentLoaded', initApp);
 
@@ -29,11 +31,20 @@ function printTodo ({userId, id, title, completed}){
     todoList.prepend(li);
 }
 
+function createUserOption (user) {
+    const userOption = document.createElement('option');
+    userOption.value = user.id;
+    userOption.innerText = user.name;
+
+    userSelect.append(userOption);
+}
+
 function initApp (){
     Promise.all([getAllTodos(), getAllUsers()]).then( values => {
         [todos, users] = values;
         // отправить в разметку
         todos.forEach(todo => printTodo(todo));
+        users.forEach(user => createUserOption(user));
     })
 }
 
