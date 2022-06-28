@@ -1,12 +1,27 @@
 let todos = [];
 let users = [];
+const todoList = document.querySelector('#todo-list');
 
 document.addEventListener('DOMContentLoaded', initApp);
+
+function getUserName (userId){
+    const user = users.find(u => u.id === userId);
+    return user.name;
+}
+
+function printTodo ({userId, id, title, completed}){
+    const li = document.createElement('li');
+    li.className = 'todo-item';
+    li.dataset.id = id;
+    li.innerHTML = `<span> "${title}" <i>by</i>  <b>${getUserName (userId)}</b> </span>`;
+    todoList.prepend(li);
+}
 
 function initApp (){
     Promise.all([getAllTodos(), getAllUsers()]).then( values => {
         [todos, users] = values;
         // отправить в разметку
+        todos.forEach(todo => printTodo(todo));
     })
 }
 

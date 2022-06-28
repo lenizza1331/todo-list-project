@@ -57,7 +57,10 @@ ul {
 .todo-item {
     display: flex;
     gap: 1rem;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
+    background-color: rgb(255, 234, 250);
+    margin-bottom: 10px;
+    border-radius: 10px;
 }
 .close {
     color: red;
