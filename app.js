@@ -14,6 +14,18 @@ function printTodo ({userId, id, title, completed}){
     li.className = 'todo-item';
     li.dataset.id = id;
     li.innerHTML = `<span> "${title}" <i>by</i>  <b>${getUserName (userId)}</b> </span>`;
+
+    const status = document.createElement('input');
+    status.type = 'checkbox';
+    status.checked = completed;
+
+    const close = document.createElement('span');
+    close.innerHTML = '&times;';
+    close.className = 'close';
+
+    li.prepend(status);
+    li.append(close);
+
     todoList.prepend(li);
 }
 
